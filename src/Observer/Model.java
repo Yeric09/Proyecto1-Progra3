@@ -9,17 +9,25 @@ import java.util.Observable;
 import actores.Ball;
 import actores.racket;
 import actores.circulo;
+import java.util.List;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Random;
+import javafx.scene.shape.Arc;
 
-/**
- *
- * @author david
- */
+
 public class Model extends Observable {
 
     public circulo r;
     public Ball b;
     public racket a;
+    public List<Ball> bs;
+    public List<Arc> w;
+    public List<Arc> l;
+    public int score;
+    
+    
+    
     static final int ARR = KeyEvent.VK_UP;
     static final int ABA = KeyEvent.VK_DOWN;
     static final int DER = KeyEvent.VK_RIGHT;
@@ -27,9 +35,14 @@ public class Model extends Observable {
 
     public Model() {
         r = new circulo(350, 350, 295);
-        b = new Ball(410, 500, 5, 5, 60);
+        
+        b = new Ball(100, 100, 5, 5, 60);
         a = new racket(60, 120, 410, 500, 0, 0);
-
+        w = new ArrayList<>(); 
+        //w.add(new Arc());
+        
+        this.reset(2,3);
+        
     }
 
     @Override
@@ -44,6 +57,15 @@ public class Model extends Observable {
         a.move(this);
         this.setChanged();
         this.notifyObservers();
+    }
+    
+    public void reset(int esferas,int velocidad){
+        Random ran = new Random();
+        bs = new ArrayList<>();
+        for(int i=0;i<esferas;i++){
+            bs.add(new Ball((int)r.x-ran.nextInt(),(int)r.y-ran.nextInt(),5,5,60));
+        }
+        score = 0;
     }
 
     public void start() {
