@@ -1,16 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package actores;
 
 import Observer.Model;
 
-/**
- *
- * @author david
- */
 public abstract class actor {
 
     public int x;
